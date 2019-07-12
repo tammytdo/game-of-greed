@@ -5,105 +5,73 @@ Game Of Greed
 """
 
 import random
+import time
 
-min = 1
-max = 6
-overall_score = 0
-score_this_round = 0
-num_dice = 6
-dice_rolled = []
-dice_kept_this_round = []
-round = 1
+# initialized values
+max_turns = 3
+min_dice_val = 1
+max_dice_val = 6
 
 def welcome():
-    return "Welcome to Game of Greed."
+    print("Welcome to Game of Greed\n")
+    time.sleep(.3)
 
-def rolling_dice():
-    return "\nrolling dice..."
+def start_turn():
+    current_turn = 0
+    money_pot = 0
+    bank = 0
 
-def dice_roll_results():
-    for i in range(num_dice):
-       dice_rolled.append(random.randint(min, max))
-    
-    print('You rolled: ', dice_rolled)
-    
-    response = input('Would you like to keep any dice? Y or N ').lower()
+    while current_turn < max_turns:
+        # Current turn
+        print(f'You are on turn {current_turn}.\n')
+        num_dice_to_roll = 6
 
-    while True: 
-        if response == "y":
-            user_keeping_these_dice = input("Which would you like to keep? ").split()
+        while num_dice_to_roll > 0:
+            time.sleep(.3)
+            print("rolling dice...\n")
+            time.sleep(.3)
 
-            for i in user_keeping_these_dice:
-                print("I: ", i)
-                dice_rolled.append(dice_kept_this_round)
+            # do_round function
+            num_dice_to_roll, money_pot, bank = do_round(num_dice_to_roll, money_pot, bank)
 
-
-            print("dice_kept_this_round", dice_kept_this_round)
-
-        if response == "n":
-            return False
-
-        else:
-            print('Please enter Y or N.')
-
-    print('exited')
-
-# def enter_score(score_this_round):
-#     enter_points = int(input("Enter score for last round: "))
-#     score_this_round += enter_points
-#     print(score_this_round)
+        current_turn += 1
+        print("Out of turns.")
+        print(f'You scored {bank} points!')
+        quit()
 
 
+def do_round(num_dice_to_roll, money_pot, bank):
+    dice_rolled = []
 
-# def prompt_after_roll():
-#     print("""
-# Enter a response: 
-#   'R' to roll again.
-#   'B' to bank points.
-#   'Q' to quit the game:
-#             """)
+    for i in range(num_dice_to_roll):
+       dice_rolled.append(random.randint(min_dice_val, max_dice_val))
+    print(f'You rolled: {dice_rolled}\n')   
+    user_selection = str(input("Enter dice to keep or enter 'b' to bank: "))
 
-#     # while response not 'Q': 
-#     #     if response 'R':
-#     #     if response 'R':
-#     #     if response 'R':
-            
-# def selection_after_prompt():
-#     player_selection = str(input()).lower()
+    # do_round functions
+    user_selection, bank, money_pot = make_choice(user_selection, bank, money_pot)
+    user_selection = [char for char in user_selection]
+    num_dice_to_roll -= len(user_selection)
+    return num_dice_to_roll, money_pot, bank
 
-#     if player_selection == 'THE DICE NUMBERS':
-#         for i in player_selection.split():
-#             dice_kept_this_round.append(i)
-            
+def make_choice(user_selection, bank, money_pot):
+    if user_selection == 'b':
+        print("inside make_choice. bank + money_pot = ", bank, money_pot)
+        bank += money_pot
+        return bank
+    else:
+        point_value = int(input("Enter points for this roll: "))
+        point_value += money_pot
+        print("inside make_choice. point_value + money_pot = ", point_value, money_pot)
 
-#     elif player_selection == 'b':
-#         #calculate the score_this_round
-#         # overall_score += score_this_round
-#         print('TBD')
+        return user_selection, bank, money_pot
 
-#     elif player_selection == 'r':
-#         #remove the num of dice selected
-#         #roll the num of dice remaining
-#         print('TBD')
-        
-#     elif player_selection == 'q':
-#         print('Thank you for playing. Goodbye.')
-#         exit()
+# def bank_round(money_pot, bank):
+#     bank += money_pot
+#     print("in bank_round()")
 
-#     else:
-#         print("Not a valid selection. Please try again.")
-#         # This requires a while loop
+def main():
+    welcome()
+    start_turn()
 
-#     return player_selection
-
-#Fuction Calls
-print(welcome())
-print(rolling_dice())
-dice_roll_results()
-
-
-# enter_score(score_this_round)
-
-# prompt_after_roll()
-# selection_after_prompt()
-
+main()
