@@ -7,114 +7,72 @@ Game Of Greed
 import random
 import time
 
-min = 1
-max = 6
-overall_score = 0
-score_this_round = 0
-num_dice = 6
-dice_rolled = []
-dice_kept_this_round = []
-
-# players will be self-scoring
-# point_guide = {
-#     '5': 50,
-#     '1': 100
-# }
-
-actions_dict = {'b': 'Bank Points',
-           'r': 'Roll Dice',
-           'q': 'Quit Game'
-          }
+# initialized values
+max_turns = 3
+min_dice_val = 1
+max_dice_val = 6
 
 def welcome():
-    print("Welcome to Game of Greed.")
-    time.sleep(1)
-    print("Enter any lucky number to roll the dice")
-    input() #why does this only work when I enter integers?
+    print("Welcome to Game of Greed\n")
+    time.sleep(.3)
 
-def rolling_dice():
-    print("\nrolling dice...")
-    time.sleep(1)
+def start_turn():
+    current_turn = 0
+    money_pot = 0
+    bank = 0
 
-def dice_done_rolling():
-    for i in range(num_dice):
-       dice_rolled.append(random.randint(min, max))
-    print('You rolled: ', dice_rolled)
-    # print(f'Random dice rolled: {dice_rolled}')
-    # why doesn't this f string work?
-    
-    dice_kept_this_round = str(input("Which would you like to keep? "))
-    dice_kept_this_round = [int(num) for num in dice_kept_this_round]
-    print('You kept: ', dice_kept_this_round)
+    while current_turn < max_turns:
+        # Current turn
+        print(f'You are on turn {current_turn}.\n')
+        num_dice_to_roll = 6
 
-def enter_score(score_this_round):
-    enter_points = int(input("Enter score for last round: "))
-    score_this_round += enter_points
-    print(score_this_round)
+        while num_dice_to_roll > 0:
+            time.sleep(.3)
+            print("rolling dice...\n")
+            time.sleep(.3)
+
+            # go to do_round function
+            num_dice_to_roll, money_pot, bank = do_round(num_dice_to_roll, money_pot, bank)
+
+        current_turn += 1
+        print("Out of turns.")
+        print(f'You scored {bank} points!')
+        quit()
 
 
+def do_round(num_dice_to_roll, money_pot, bank):
+    dice_rolled = []
 
-def prompt_after_roll():
-    print("""Options: 
-            Enter at least one dice number to roll again.
-            Enter 'b' to bank points.
-            Enter 'q' to quit the game:
-                    """)
+    for i in range(num_dice_to_roll):
+       dice_rolled.append(random.randint(min_dice_val, max_dice_val))
+    print(f'You rolled: {dice_rolled}\n')   
+    user_selection = str(input("Enter dice to keep or enter 'b' to bank: "))
 
-def selection_after_prompt():
-    player_selection = str(input()).lower()
+    # go to make_choice function
+    user_selection, bank, money_pot = make_choice(user_selection, bank, money_pot)
+    user_selection = [char for char in user_selection]
+    num_dice_to_roll -= len(user_selection)
+    return num_dice_to_roll, money_pot, bank
 
-    if player_selection == 'THE DICE NUMBERS':
-        for i in player_selection.split():
-            dice_kept_this_round.append(i)
-            
-
-    elif player_selection == 'b':
-        #calculate the score_this_round
-        # overall_score += score_this_round
-        print('TBD')
-
-    elif player_selection == 'r':
-        #remove the num of dice selected
-        #roll the num of dice remaining
-        print('TBD')
-        
-    elif player_selection == 'q':
-        print('Thank you for playing. Goodbye.')
-        exit()
-
+def make_choice(user_selection, bank, money_pot):
+    if user_selection == 'b':
+        print("inside make_choice. bank + money_pot = ", bank, money_pot)
+        # bank += money_pot
+        # money_pot = 0
+        return user_selection, bank, money_pot
     else:
-        print("Not a valid selection. Please try again.")
-        # This requires a while loop
+        point_value = int(input("Enter points for this roll: "))
+        point_value += money_pot
+        print("inside make_choice. point_value + money_pot = ", point_value, money_pot)
 
-    return player_selection
+        return user_selection, bank, money_pot
 
-#Fuction Calls
-welcome()
-rolling_dice()
-dice_done_rolling()
-enter_score(score_this_round)
+def bank_round(money_pot, bank):
+    # bank += money_pot
+    print("in bank_round()")
 
-prompt_after_roll()
-selection_after_prompt()
+def main():
+    welcome()
+    start_turn()
 
-
-
-
-
-
-"""
-Add to points_guide once I understand how to calculate.
-Try using sets. if 5, 5, 5 is a set of rolled_dice.
-Just reviewed class recording. User will self calulate. 
-
-    #'three of a kind': 100 * times the number rolled,
-    #'except for three ones': 1000,
-    #'four, five, or six of a kind': each additional die is worth double the three of a kind score
-        # This makes the highest possible score in a single roll 4000 for six ones (1000 for three ones, after that player gains 1000 points for each additional one in that series of rolling.) The ONE is the only die you ever count in the thousands.
-    #'A straight from 1 to 6': 1500
-        # If a player fails to roll a straight they may make one attempt to complete the straight. If the desired number(s) does not turn up on the next roll that round is a "crap out" even if there are scoring dice on the table i.e. 1's or 5's.
-    #'Three pairs': 1000 
-        # For instance 2+2, 4+4, 5+5. This rule does not count if you roll a quadruple and a pair e.g. 2+2, 2+2, 6+6 unless stated otherwise (some places have their own house rules).
-        # If a player fails to roll a three of a kind, they may make one attempt to complete the three of a kind. If the desired number(s) does not turn up on the next roll, that round is a "crap out", even if there are scoring dice on the table; i.e. 1's or 5's.
-"""
+main()
