@@ -31,7 +31,7 @@ def start_turn():
             print("rolling dice...\n")
             time.sleep(.3)
 
-            # do_round function
+            # go to do_round function
             num_dice_to_roll, money_pot, bank = do_round(num_dice_to_roll, money_pot, bank)
 
         current_turn += 1
@@ -48,7 +48,7 @@ def do_round(num_dice_to_roll, money_pot, bank):
     print(f'You rolled: {dice_rolled}\n')   
     user_selection = str(input("Enter dice to keep or enter 'b' to bank: "))
 
-    # do_round functions
+    # go to make_choice function
     user_selection, bank, money_pot = make_choice(user_selection, bank, money_pot)
     user_selection = [char for char in user_selection]
     num_dice_to_roll -= len(user_selection)
@@ -57,8 +57,9 @@ def do_round(num_dice_to_roll, money_pot, bank):
 def make_choice(user_selection, bank, money_pot):
     if user_selection == 'b':
         print("inside make_choice. bank + money_pot = ", bank, money_pot)
-        bank += money_pot
-        return bank
+        # bank += money_pot
+        # money_pot = 0
+        return user_selection, bank, money_pot
     else:
         point_value = int(input("Enter points for this roll: "))
         point_value += money_pot
@@ -66,9 +67,9 @@ def make_choice(user_selection, bank, money_pot):
 
         return user_selection, bank, money_pot
 
-# def bank_round(money_pot, bank):
-#     bank += money_pot
-#     print("in bank_round()")
+def bank_round(money_pot, bank):
+    # bank += money_pot
+    print("in bank_round()")
 
 def main():
     welcome()
