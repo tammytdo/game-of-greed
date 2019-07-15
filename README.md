@@ -29,12 +29,3 @@ N/A
 
 ## Change Log
 07-08-2018 7:00pm - Added functionality to roll six dice and receive random numbers in the range 1 to 6.
-
-
-<!-- 
-Application should simulate rolling between 1 and 6 dice
-Application should allow user to set aside dice each roll
-Application should user to enter score per roll
-Application should allow “banking” current score or rolling again.
-Application should keep track of total score
-Application should keep track of current round -->
