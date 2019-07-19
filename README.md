@@ -28,4 +28,9 @@ random library
 N/A
 
 ## Change Log
-07-08-2018 7:00pm - Added functionality to roll six dice and receive random numbers in the range 1 to 6.
+07-08-2019 7:00pm - Functionality to roll six dice and receive random numbers in the range 1 to 6.
+07-08-2019 7:10pm - Functionality for user to set aside dice each roll
+07-11-2019 2:30pm - Functionality for user to enter score per roll
+07-11-2019 3:00pm - Functionality to keep track of total score
+07-11-2019 4:00pm - Functionality for “banking” current score or rolling again
+07-12-2019 2:30pm - Functionality to keep track of current round
