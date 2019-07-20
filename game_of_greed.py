@@ -49,7 +49,7 @@ def start_turn():
 def do_round(num_die_to_roll, money_pot, bank, current_turn):
     die_rolled = []
 
-    die_rolled, num_die_to_roll = determine_which_die_rolled(die_rolled, num_die_to_roll)
+    die_rolled, num_die_to_roll = die_roll_results(die_rolled, num_die_to_roll)        
 
     # handle error for entries that are not a number or the letter b
     user_selection = str(input("Enter at least one die to roll again, or enter 'b' to bank points: "))
@@ -115,7 +115,7 @@ def rolling_die_text():
     print("rolling die...\n")
     time.sleep(.3)
 
-def determine_which_die_rolled(die_rolled, num_die_to_roll):
+def die_roll_results(die_rolled, num_die_to_roll):
     for i in range(num_die_to_roll):
         die_rolled.append(random.randint(min_die_val, max_die_val))
     
