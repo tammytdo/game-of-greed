@@ -12,9 +12,12 @@ max_turns = 3
 min_die_val = 1
 max_die_val = 6
 
+# Game play 
 def welcome():
     print("Welcome to Game of Greed")
     time.sleep(.3)
+
+    start_turn()
 
 def start_turn():
     current_turn = 1
@@ -25,17 +28,24 @@ def start_turn():
         num_die_to_roll = 6
 
         while num_die_to_roll > 0:
+            # game_summary function
             game_summary(bank, money_pot, current_turn, max_turns)
 
+            # rolling_die_text function
             rolling_die_text()
 
+            # do_round function
             num_die_to_roll, money_pot, bank, current_turn = do_round(num_die_to_roll, money_pot, bank, current_turn)
         
         if num_die_to_roll == 0:
+            # bank_and_reset_die function
             money_pot, bank, current_turn = bank_and_reset_die(money_pot, bank, current_turn)
 
+    # end_game function
     end_game(bank)
 
+
+# Game functions
 def do_round(num_die_to_roll, money_pot, bank, current_turn):
     die_rolled = []
 
@@ -132,8 +142,5 @@ def end_game(bank):
     print(f'Game over. You scored {bank} points!')
     quit()
 
-def main():
+if __name__ == "__main__":
     welcome()
-    start_turn()
-
-main()
