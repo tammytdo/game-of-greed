@@ -36,12 +36,12 @@ die_score_dict = { 'straight': 1500,
 
 def calculate_points(die_kept):
     print("die_kept", die_kept)
-    die_summary = { 1 : die_kept.count(1),
-                    2 : die_kept.count(2),
-                    3 : die_kept.count(3),
-                    4 : die_kept.count(4),
-                    5 : die_kept.count(5),
-                    6 : die_kept.count(6)  }
+    die_summary = { 1 : die_kept.count('1'),
+                    2 : die_kept.count('2'),
+                    3 : die_kept.count('3'),
+                    4 : die_kept.count('4'),
+                    5 : die_kept.count('5'),
+                    6 : die_kept.count('6')  }
 
     print('die_summary', die_summary)
 
@@ -67,62 +67,62 @@ def calculate_points(die_kept):
         print(die_score_dict['three_ones'])
         points_earned += (die_summary[1] * 1000) - 2300
         print(points_earned)
-    # elif die_summary[1] == 4:
-    #     points_earned += die_score_dict['four_ones']
-    # elif die_summary[1] == 5:
-    #     points_earned += die_score_dict['five_ones']
-    # elif die_summary[1] == 6:
-    #     points_earned += die_score_dict['six_ones']
+    elif die_summary[1] == 4:
+        points_earned += die_score_dict['four_ones']
+    elif die_summary[1] == 5:
+        points_earned += die_score_dict['five_ones']
+    elif die_summary[1] == 6:
+        points_earned += die_score_dict['six_ones']
 
-    # if die_summary[2] == 3:
-    #     points_earned += die_score_dict['three_twos']
-    # elif die_summary[2] == 4:
-    #     points_earned += die_score_dict['four_twos']
-    # elif die_summary[2] == 5:
-    #     points_earned += die_score_dict['five_twos']
-    # elif die_summary[2] == 6:
-    #     points_earned += die_score_dict['six_twos']
+    if die_summary[2] == 3:
+        points_earned += die_score_dict['three_twos']
+    elif die_summary[2] == 4:
+        points_earned += die_score_dict['four_twos']
+    elif die_summary[2] == 5:
+        points_earned += die_score_dict['five_twos']
+    elif die_summary[2] == 6:
+        points_earned += die_score_dict['six_twos']
 
-    # if die_summary[3] == 3:
-    #     points_earned += die_score_dict['three_threes']
-    # elif die_summary[3] == 4:
-    #     points_earned += die_score_dict['four_threes']
-    # elif die_summary[3] == 5:
-    #     points_earned += die_score_dict['five_threes']
-    # elif die_summary[3] == 6:
-    #     points_earned += die_score_dict['six_threes']
+    if die_summary[3] == 3:
+        points_earned += die_score_dict['three_threes']
+    elif die_summary[3] == 4:
+        points_earned += die_score_dict['four_threes']
+    elif die_summary[3] == 5:
+        points_earned += die_score_dict['five_threes']
+    elif die_summary[3] == 6:
+        points_earned += die_score_dict['six_threes']
 
-    # if die_summary[4] == 3:
-    #     points_earned += die_score_dict['three_fours']
-    # elif die_summary[4] == 4:
-    #     points_earned += die_score_dict['four_fours']
-    # elif die_summary[4] == 5:
-    #     points_earned += die_score_dict['five_fours']
-    # elif die_summary[4] == 6:
-    #     points_earned += die_score_dict['six_fours']
+    if die_summary[4] == 3:
+        points_earned += die_score_dict['three_fours']
+    elif die_summary[4] == 4:
+        points_earned += die_score_dict['four_fours']
+    elif die_summary[4] == 5:
+        points_earned += die_score_dict['five_fours']
+    elif die_summary[4] == 6:
+        points_earned += die_score_dict['six_fours']
 
-    # if die_summary[5] == 3:
-    #     points_earned += die_score_dict['three_fives']
-    # elif die_summary[5] == 4:
-    #     points_earned += die_score_dict['four_fives']
-    # elif die_summary[5] == 5:
-    #     points_earned += die_score_dict['five_fives']
-    # elif die_summary[5] == 6:
-    #     points_earned += die_score_dict['six_fives']
+    if die_summary[5] == 3:
+        points_earned += die_score_dict['three_fives']
+    elif die_summary[5] == 4:
+        points_earned += die_score_dict['four_fives']
+    elif die_summary[5] == 5:
+        points_earned += die_score_dict['five_fives']
+    elif die_summary[5] == 6:
+        points_earned += die_score_dict['six_fives']
 
-    # if die_summary[6] == 3:
-    #     points_earned += die_score_dict['three_six']
-    # elif die_summary[6] == 4:
-    #     points_earned += die_score_dict['four_six']
-    # elif die_summary[6] == 5:
-    #     points_earned += die_score_dict['five_six']
-    # elif die_summary[6] == 6:
-    #     points_earned += die_score_dict['six_six']
+    if die_summary[6] == 3:
+        points_earned += die_score_dict['three_sixes']
+    elif die_summary[6] == 4:
+        points_earned += die_score_dict['four_sixes']
+    elif die_summary[6] == 5:
+        points_earned += die_score_dict['five_sixes']
+    elif die_summary[6] == 6:
+        points_earned += die_score_dict['six_sixes']
 
-    # if pair_counter == 3:
-    #     points_earned += 1500
+    if pair_counter == 3:
+        points_earned += 1500
 
-    # else:
-    #     points_earned += 500000
+    else:
+        points_earned += 0
 
     return points_earned 
