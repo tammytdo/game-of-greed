@@ -127,10 +127,12 @@ def die_roll_results(die_rolled, num_die_to_roll):
 def bank_and_reset_die(money_pot, bank, current_turn):
     print('All die used\n')
     print('Points banked and die reset\n')
+    bank += money_pot
+    money_pot = 0
 
     time.sleep(.5)
     current_turn += 1
-    print('New turn started\n')
+    print('New turn started.\n')
     
     return money_pot, bank, current_turn
 
