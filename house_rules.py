@@ -1,3 +1,4 @@
+from game_of_greed import read_file
 
 die_score_dict = { 'straight': 1500,
                     'three_pairs': 1500,
@@ -53,7 +54,14 @@ def calculate_points(die_kept):
 
     points_earned += die_summary[1] * 100
     points_earned += die_summary[5] * 50
-    
+
+
+##############
+    # custom rules
+    if die_summary.items() == {1:1, 2:1, 3:1, 4:1, 5:1, 6:1}:
+        points_earned += int(custom_rules_dict['STRAIGHT_SCORE']) | 1500
+
+     
     if is_a_straight:
         points_earned += die_score_dict['straight']
 
