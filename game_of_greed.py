@@ -143,8 +143,31 @@ def bank_round(money_pot, bank, current_turn):
 
 def end_game(bank):
     print("Out of turns.\n")
-    print(f'Game over. You scored {bank} points!')
     quit()
 
 if __name__ == "__main__":
     welcome()
+    
+    # Do I need to pass in variables
+    read_file()
+
+# How do I write to my file?
+def read_file(path, bank):
+    try:
+        with open(path) as file:
+            contents = file.read()
+            contents += ' - HAS BEEN READ.'
+            print('contents:', contents)
+
+        with open('score.txt', 'w') as outputfile:
+            outputfile.write(contents)
+
+        print('WRITE COMPLETE')
+
+    except FileNotFoundError as error:
+        print('Error ocurred. Handled the error: ', error)
+
+    finally:
+        print('Thanks for playing')
+
+# Need to convert and merge my custom rules into my house_rules dictionary. Allow calculation according to custom rules. 
