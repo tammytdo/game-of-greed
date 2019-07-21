@@ -45,8 +45,6 @@ def start_turn():
     # end_game function
     end_game(bank)
 
-
-# Game logic
 def do_round(num_die_to_roll, money_pot, bank, current_turn):
     die_rolled = []
     die_kept = []

@@ -1,14 +1,15 @@
 import pytest
-from game_of_greed import make_choice
+from game_of_greed import make_choice 
 from game_of_greed import calculate_points
-from game_of_greed import start_turn
 
+
+# which functions from game_of_greed.py should I target for importing and testing?
 
 # test_zilch
 # non scoring roll should return 0
 def test_zilch():
     assert calculate_points[2, 3, 4, 6] == 0
-    assert calculate_points[] == 0
+    assert calculate_points[''] == 0
 
 # test_ones
 # rolls with various number of 1s should return correct score

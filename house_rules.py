@@ -1,5 +1,3 @@
-# bug causing any dice combo to return value in the else statement
-# made edits. bug causing any dice combo to return 0 value
 
 die_score_dict = { 'straight': 1500,
                     'three_pairs': 1500,

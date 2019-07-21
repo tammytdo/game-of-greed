@@ -8,6 +8,7 @@ pylint = "*"
 
 [packages]
 pytest-watch = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.6"
