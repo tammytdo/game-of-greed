@@ -91,10 +91,13 @@ def make_choice(user_selection, bank, money_pot, die_kept):
     
     if user_selection == 'b':
         bank += money_pot
-        return user_selection, bank, money_pot
+        return user_selection, bank, money_pot, die_kept
 
     else:
-        points_earned = calculate_points(user_selection, die_kept)
+        for i in user_selection:
+            die_kept.append(i)
+            
+        points_earned = calculate_points(die_kept)
         money_pot += points_earned 
 
         return user_selection, bank, money_pot, die_kept

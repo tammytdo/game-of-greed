@@ -3,14 +3,12 @@ from game_of_greed import make_choice
 # test_zilch
 # non scoring roll should return 0
 def test_zilch():
-    expected = 0
-    actual = 
-    assert make_choice ==
+    pass
 
 # test_ones
 # rolls with various number of 1s should return correct score
 def test_ones():
-    pass
+    assert [1,2,3,4,5,2] == 100
 
 # test_twos
 # rolls with various number of 2s should return correct score
