@@ -1,11 +1,12 @@
 #!/usr/local/bin/python
 
+from house_rules import calculate_points
+import random
+import time
+
 """
 Game Of Greed
 """
-
-import random
-import time
 
 # initialized values
 max_turns = 3
@@ -45,60 +46,64 @@ def start_turn():
     end_game(bank)
 
 
-# Game functions
+# Game logic
 def do_round(num_die_to_roll, money_pot, bank, current_turn):
     die_rolled = []
-
+    die_kept = []
     die_rolled, num_die_to_roll = die_roll_results(die_rolled, num_die_to_roll)        
 
     # handle error for entries that are not a number or the letter b
     user_selection = str(input("Enter at least one die to roll again, or enter 'b' to bank points: "))
-    
-    #find out if zilch, single, double, triple., etc.
-    
-    user_selection, bank, money_pot = make_choice(user_selection, bank, money_pot)
+        
+    user_selection, bank, money_pot, die_kept = make_choice(user_selection, bank, money_pot, die_kept)
 
     if user_selection == 'b':
         money_pot = 0   #reset money_pot
         num_die_to_roll = 0  #reset num_die_to_roll
         return num_die_to_roll, money_pot, bank, current_turn 
 
-    user_selection = validate_user_input(user_selection)
+    user_selection = user_selection_to_string(user_selection)
 
-    user_selection, die_rolled = remove_from_die_rolled(user_selection, die_rolled)
+    user_selection, die_rolled, die_kept = remove_from_die_rolled(user_selection, die_rolled, die_kept)
     
     num_die_to_roll -= len(user_selection)
     return num_die_to_roll, money_pot, bank, current_turn
 
-def remove_from_die_rolled(user_selection, die_rolled):
+def remove_from_die_rolled(user_selection, die_rolled, die_kept):
+
     for i in user_selection:
         # keep for debugging elif statement
         # print("i is", i, "and type is", type(i))
 
         if i in user_selection:
             die_rolled.remove(i)
+            die_kept.append(i)
             print(f'Dice #{i} kept')
 
         # Why won't this message print when the dice value i is not present in user_selection?  
         elif i not in die_rolled:
             print('Invalid die selection.')
 
-    return user_selection, die_rolled
+    return user_selection, die_rolled, die_kept
 
-def make_choice(user_selection, bank, money_pot):
+def make_choice(user_selection, bank, money_pot, die_kept):
     
     if user_selection == 'b':
         bank += money_pot
         return user_selection, bank, money_pot
 
     else:
-        points_earned_this_round = int(input("\nHow many points for this roll? "))
+        points_earned = calculate_points(user_selection, die_kept)
+
+        # points_earned  = int(input("\nHow many points for this roll? "))
+
         # Validate that input is an integer before adding to money_pot
-        money_pot += points_earned_this_round
 
-        return user_selection, bank, money_pot
+        money_pot += points_earned 
 
-def validate_user_input(user_selection):
+        return user_selection, bank, money_pot, die_kept
+
+def user_selection_to_string(user_selection):
     #Fix to allow user to also enter with spaces 
     user_selection = [int(char) for char in user_selection]
     return user_selection

@@ -1,7 +1,11 @@
+from game_of_greed import make_choice
+
 # test_zilch
 # non scoring roll should return 0
 def test_zilch():
-    pass
+    expected = 0
+    actual = 
+    assert make_choice ==
 
 # test_ones
 # rolls with various number of 1s should return correct score
