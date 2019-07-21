@@ -50,6 +50,7 @@ def start_turn():
 def do_round(num_die_to_roll, money_pot, bank, current_turn):
     die_rolled = []
     die_kept = []
+    # breakpoint() 
     die_rolled, num_die_to_roll = die_roll_results(die_rolled, num_die_to_roll)        
 
     # handle error for entries that are not a number or the letter b

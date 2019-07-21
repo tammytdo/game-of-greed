@@ -1,3 +1,5 @@
+# bug causing any dice combo to return value in the else statement
+
 die_score_dict = { 'straight': 1500,
                     'three_pairs': 1500,
 
@@ -28,13 +30,10 @@ die_score_dict = { 'straight': 1500,
 
                     'three_sixes': 600,
                     'four_sixes': 1200,
-                    'five_sixes':2400,
-                    'six_sixes':3600    }
+                    'five_sixes': 2400,
+                    'six_sixes': 3600    }
 
 def calculate_points(user_selection, die_kept):
-    points_earned  = 0
-    pair_counter = 0
-    is_a_straight = True
 
     die_summary = { 1 : die_kept.count(1),
                     2 : die_kept.count(2),
@@ -43,22 +42,25 @@ def calculate_points(user_selection, die_kept):
                     5 : die_kept.count(5),
                     6 : die_kept.count(6)  }
 
+    points_earned = 0
+    pair_counter = 0
+    is_a_straight = True
+
     for value, count in die_summary.items():
         if count != 1:
             is_a_straight = False
 
         if count == 2:
             pair_counter += 1
+
+    points_earned += die_summary[1] * 100
+    points_earned += die_summary[5] * 50
     
     if is_a_straight:
         points_earned += die_score_dict['straight']
-    
-    elif pair_counter == 3:
-        points_earned += 1500
 
-    elif die_summary[1] < 3:
-        points_earned += 1 * 100
-    elif die_summary[1] == 3:
+
+    if die_summary[1] == 3:
         points_earned += die_score_dict['three_ones']
     elif die_summary[1] == 4:
         points_earned += die_score_dict['four_ones']
@@ -67,7 +69,7 @@ def calculate_points(user_selection, die_kept):
     elif die_summary[1] == 6:
         points_earned += die_score_dict['six_ones']
 
-    elif die_summary[2] == 3:
+    if die_summary[2] == 3:
         points_earned += die_score_dict['three_twos']
     elif die_summary[2] == 4:
         points_earned += die_score_dict['four_twos']
@@ -76,7 +78,7 @@ def calculate_points(user_selection, die_kept):
     elif die_summary[2] == 6:
         points_earned += die_score_dict['six_twos']
 
-    elif die_summary[3] == 3:
+    if die_summary[3] == 3:
         points_earned += die_score_dict['three_threes']
     elif die_summary[3] == 4:
         points_earned += die_score_dict['four_threes']
@@ -85,7 +87,7 @@ def calculate_points(user_selection, die_kept):
     elif die_summary[3] == 6:
         points_earned += die_score_dict['six_threes']
 
-    elif die_summary[4] == 3:
+    if die_summary[4] == 3:
         points_earned += die_score_dict['three_fours']
     elif die_summary[4] == 4:
         points_earned += die_score_dict['four_fours']
@@ -94,9 +96,7 @@ def calculate_points(user_selection, die_kept):
     elif die_summary[4] == 6:
         points_earned += die_score_dict['six_fours']
 
-    elif die_summary[5] < 3:
-        points_earned += 5 * 50
-    elif die_summary[5] == 3:
+    if die_summary[5] == 3:
         points_earned += die_score_dict['three_fives']
     elif die_summary[5] == 4:
         points_earned += die_score_dict['four_fives']
@@ -105,7 +105,7 @@ def calculate_points(user_selection, die_kept):
     elif die_summary[5] == 6:
         points_earned += die_score_dict['six_fives']
 
-    elif die_summary[6] == 3:
+    if die_summary[6] == 3:
         points_earned += die_score_dict['three_six']
     elif die_summary[6] == 4:
         points_earned += die_score_dict['four_six']
@@ -114,7 +114,10 @@ def calculate_points(user_selection, die_kept):
     elif die_summary[6] == 6:
         points_earned += die_score_dict['six_six']
 
+    if pair_counter == 3:
+        points_earned += 1500
+
     else:
-        points_earned += 0
+        points_earned += 500000
 
     return points_earned 
