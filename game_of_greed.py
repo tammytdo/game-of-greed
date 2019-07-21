@@ -94,11 +94,6 @@ def make_choice(user_selection, bank, money_pot, die_kept):
 
     else:
         points_earned = calculate_points(user_selection, die_kept)
-
-        # points_earned  = int(input("\nHow many points for this roll? "))
-
-        # Validate that input is an integer before adding to money_pot
-
         money_pot += points_earned 
 
         return user_selection, bank, money_pot, die_kept
