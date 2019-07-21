@@ -33,15 +33,12 @@ die_score_dict = { 'straight': 1500,
                     'six_sixes': 3600    }
 
 def calculate_points(die_kept):
-    print("die_kept", die_kept)
     die_summary = { 1 : die_kept.count('1'),
                     2 : die_kept.count('2'),
                     3 : die_kept.count('3'),
                     4 : die_kept.count('4'),
                     5 : die_kept.count('5'),
                     6 : die_kept.count('6')  }
-
-    print('die_summary', die_summary)
 
     points_earned = 0
     pair_counter = 0
