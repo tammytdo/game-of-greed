@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 
-from house_rules import calculate_points
+from house_rules import Points
+from house_rules import Calculations
 import random
 import time
 
@@ -95,7 +96,7 @@ def make_choice(user_selection, bank, money_pot, die_kept):
         for i in user_selection:
             die_kept.append(i)
             
-        points_earned = calculate_points(die_kept)
+        points_earned = Calculations.calculate_points(die_kept, Points.die_scoring, die_score_dict)
         money_pot += points_earned 
 
         return user_selection, bank, money_pot, die_kept
