@@ -34,3 +34,6 @@ N/A
 07-11-2019 3:00pm - Functionality to keep track of total score
 07-11-2019 4:00pm - Functionality for “banking” current score or rolling again
 07-12-2019 2:30pm - Functionality to keep track of current round
+07-21-2019 9:50am - Functionality to keep auto calculate points
+07-21-2019 1:00pm - Functionality to add custom rule calculation
+07-21-2019 1:50pm - Functionality for file error handling
